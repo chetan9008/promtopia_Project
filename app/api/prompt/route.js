@@ -1,11 +1,13 @@
 import Prompt from "@models/prompt";
-import { connectToDB } from "./../../../utils/datatbase.js";
+import { connectToDB } from "./../../../utils/datatbase";
 
 export const GET = async (request) => {
   try {
     await connectToDB();
 
     const prompts = await Prompt.find({}).populate("creator");
+
+    console.log(prompts);
 
     return new Response(JSON.stringify(prompts), { status: 200 });
   } catch (error) {
